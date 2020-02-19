@@ -4,7 +4,7 @@
 
 package cmp
 
-func Max(values ...int) int {
+func Max(values ...string) string {
 	if len(values) == 0 {
 		panic("at least one argument required")
 	}
@@ -17,7 +17,7 @@ func Max(values ...int) int {
 	return m
 }
 
-func Min(values ...int) int {
+func Min(values ...string) string {
 	if len(values) == 0 {
 		panic("at least one argument required")
 	}

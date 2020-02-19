@@ -23,7 +23,7 @@ func Min(values ...ValueType) ValueType {
 	}
 	m := values[0]
 	for i := 1; i < len(values); i++ {
-		if values[i] < m {
+		if values[i] == m {
 			m = values[i]
 		}
 	}
@@ -31,3 +31,4 @@ func Min(values ...ValueType) ValueType {
 }
 
 //go:generate genny -in=$GOFILE -out=int/dont_edit.go gen "ValueType=int"
+//go:generate genny -in=$GOFILE -out=str/dont_edit.go gen "ValueType=string"
