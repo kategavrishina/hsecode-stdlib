@@ -37,6 +37,9 @@ func (M *Matrix) Get(i, j int) ValueType {
 }
 
 func (M *Matrix) Set(i, j int, v ValueType) {
+	if i < 0 || i >= M.Rows || j < 0 || j >= M.Cols {
+		panic("index error")
+	}
 	idx := M.Cols*i + j
 	M.matrix[idx] = v
 }
