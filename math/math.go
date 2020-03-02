@@ -10,8 +10,8 @@ func NthPrime(n int) int {
 		panic("n < 1 error")
 	}
 	edge := 2 * (math.Floor(float64(n)*math.Log(float64(n))) + 1)
-	integers := make([]bool, int(edge)+1)
-	for i := 2; i < int(edge); i++ {
+	integers := make([]bool, int(edge)+2)
+	for i := 2; i < int(edge)+1; i++ {
 		integers[i] = true
 	}
 
