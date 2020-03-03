@@ -13,20 +13,17 @@ func NthPrime(n int) int {
 	}
 	edge := math.Ceil(float64(n) * (math.Log(float64(n)) + math.Log(math.Log(float64(n)))))
 	integers := make([]bool, int(float64(int(edge)/2)))
-	for i := 0; i < len(integers); i++ {
-		integers[i] = true
-	}
 	for p := 3; p*p <= len(integers)*2; p += 2 {
-		if integers[((p+1)/2)-2] == true {
-			for i := p * 3; i <= (len(integers)*2)+1; i += 2 * p {
-				integers[int(math.Floor(float64(i/2)))-1] = false
+		if integers[((p+1)/2)-2] == false {
+			for i := p * p; i <= (len(integers)*2)+1; i += 2 * p {
+				integers[int(math.Floor(float64(i/2)))-1] = true
 			}
 		}
 	}
 	c := 0
 	var prime int
 	for p := 0; p < len(integers); p++ {
-		if integers[p] == true {
+		if integers[p] == false {
 			c += 1
 		}
 		if (c + 1) == n {
