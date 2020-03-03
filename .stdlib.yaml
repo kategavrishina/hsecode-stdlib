@@ -1,7 +1,7 @@
 tests:
   # Here goes a list of tests you are ready to run.
   # It is expected to be a YAML sequence of strings.
-  - cmp
-  - matrix
+  #- cmp
+  #- matrix
   - primes
   #- ...

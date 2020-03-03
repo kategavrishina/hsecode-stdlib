@@ -23,11 +23,16 @@ func NthPrime(n int) int {
 			}
 		}
 	}
-	var primes []int
-	for p := 0; len(primes) < n; p++ {
+	c := 0
+	var prime int
+	for p := 0; p < len(integers); p++ {
 		if integers[p] == true {
-			primes = append(primes, (p*2)+3)
+			c += 1
+		}
+		if (c + 1) == n {
+			prime = (p * 2) + 3
+			break
 		}
 	}
-	return primes[n-2]
+	return prime
 }
