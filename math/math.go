@@ -24,7 +24,7 @@ func NthPrime(n int) int {
 		}
 	}
 	var primes []int
-	for p := 0; p < len(integers); p++ {
+	for p := 0; len(primes) < n; p++ {
 		if integers[p] == true {
 			primes = append(primes, (p*2)+3)
 		}
