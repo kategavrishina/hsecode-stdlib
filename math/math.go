@@ -12,7 +12,7 @@ func NthPrime(n int) int {
 		return 2
 	}
 	edge := math.Ceil(float64(n) * (math.Log(float64(n)) + math.Log(math.Log(float64(n)))))
-	integers := make([]bool, int(math.Ceil(float64(int(edge)/2))))
+	integers := make([]bool, int(float64(int(edge)/2)))
 	for i := 0; i < len(integers); i++ {
 		integers[i] = true
 	}
