@@ -1,5 +1,7 @@
 package cmp
 
+//go:generate genny -in=$GOFILE -out=int/dont_edit.go gen "ValueType=int"
+
 import "github.com/cheekybits/genny/generic"
 
 type ValueType generic.Number
@@ -29,6 +31,3 @@ func Min(values ...ValueType) ValueType {
 	}
 	return m
 }
-
-//go:generate genny -in=$GOFILE -out=int/dont_edit.go gen "ValueType=int"
-//go:generate genny -in=$GOFILE -out=str/dont_edit.go gen "ValueType=string"

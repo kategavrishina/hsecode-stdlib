@@ -1,7 +1,7 @@
 package math_test
 
 import (
-	math "hsecode.com/stdlib/math"
+	"hsecode.com/stdlib/math"
 	"testing"
 )
 
