@@ -25,7 +25,7 @@ func (nda *NDArray) Idx(indices ...int) int {
 		if ind < 0 {
 			panic("Index is negative")
 		}
-		if ind > nda.shape[i] {
+		if ind >= nda.shape[i] {
 			panic("Dimensions mismatch (particular index)")
 		}
 	}
