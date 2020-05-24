@@ -66,13 +66,13 @@ func (q *MaxQueue) Pop() (ValueType, error) {
 		q.maxIn = []ValueType{}
 	}
 
+	q.maxOut = q.maxOut[:len(q.maxOut)-1]
+
 	last := q.out[len(q.out)-1]
 	q.out = q.out[:len(q.out)-1]
 	if len(q.out) == 0 {
 		q.maxOut = []ValueType{}
 	}
-
-	q.maxOut = q.maxOut[:len(q.maxOut)-1]
 
 	return last, nil
 }
