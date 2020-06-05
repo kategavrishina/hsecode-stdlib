@@ -1,12 +1,12 @@
 package fulltext_test
 
 import (
-	fulltext "hsecode.com/stdlib/strings"
+	fulltext2 "hsecode.com/stdlib/strings/fulltext"
 	"testing"
 )
 
 func TestFullText(t *testing.T) {
-	docs := fulltext.New([]string{
+	docs := fulltext2.New([]string{
 		"this is the house that jack built",
 		"this is the rat that ate the malt",
 	})
