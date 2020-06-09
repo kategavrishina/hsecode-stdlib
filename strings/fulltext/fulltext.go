@@ -75,6 +75,6 @@ func (idx *Index) Search(query string) []int {
 			found = append(found, k)
 		}
 	}
-
+	sort.Ints(found)
 	return found
 }
