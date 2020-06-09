@@ -21,15 +21,6 @@ func unique(intSlice []int) []int {
 	return list
 }
 
-func contains(s []int, e int) bool {
-	for _, a := range s {
-		if a == e {
-			return true
-		}
-	}
-	return false
-}
-
 func New(docs []string) *Index {
 	idx := new(Index)
 	idx.idx = make(map[string][]int)
@@ -54,22 +45,31 @@ func (idx *Index) Search(query string) []int {
 	wquery := strings.Split(query, " ")
 	queryhash := make(map[string][]int)
 	for _, word := range wquery {
-		doc_idx := idx.idx[word]
-		queryhash[word] = doc_idx
+		docIdx := idx.idx[word]
+		queryhash[word] = docIdx
 	}
 	length := len(wquery)
 	found := make([]int, 0)
 	first := queryhash[wquery[0]]
+	indices := make(map[int]int)
 	for _, id := range first {
-		l := 0
-		for _, v := range queryhash {
-			if contains(v, id) {
-				l++
+		indices[id] = 0
+	}
+
+	for _, v := range queryhash {
+		for _, id := range v {
+			_, ok := indices[id]
+			if ok {
+				indices[id]++
 			}
 		}
-		if l == length {
-			found = append(found, id)
+	}
+
+	for k, v := range indices {
+		if v == length {
+			found = append(found, k)
 		}
 	}
+
 	return found
 }
