@@ -31,7 +31,7 @@ func New(docs []string) *Index {
 		}
 	}
 	for k, v := range idx.idx {
-		sort.Ints(v)
+		// sort.Ints(v)
 		idx.idx[k] = unique(v)
 	}
 	return idx
@@ -52,6 +52,7 @@ func (idx *Index) Search(query string) []int {
 	found := make([]int, 0)
 	first := queryhash[wquery[0]]
 	indices := make(map[int]int)
+	sort.Ints(first)
 	for _, id := range first {
 		indices[id] = 0
 	}
