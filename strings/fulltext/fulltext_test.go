@@ -1,12 +1,12 @@
 package fulltext_test
 
 import (
-	fulltext2 "hsecode.com/stdlib/strings/fulltext"
+	fulltext "hsecode.com/stdlib/strings/fulltext"
 	"testing"
 )
 
 func TestFullText(t *testing.T) {
-	docs := fulltext2.New([]string{
+	docs := fulltext.New([]string{
 		"this is the house that jack built",
 		"this is the rat that ate the malt",
 	})
@@ -25,5 +25,19 @@ func TestFullText(t *testing.T) {
 	s3 := docs.Search("is this the")
 	if len(s3) != 2 {
 		t.Fatalf("Two documents found doesn't work: %v", s3)
+	}
+}
+
+func TestDuplicate(t *testing.T) {
+	docs := fulltext.New([]string{
+		"this is the house that jack built",
+		"house that jack built this is the",
+	})
+	s0 := docs.Search("the jack")
+	if s0[1] != 1 {
+		t.Fatalf("Duplicate documents doesn't work: %v", s0)
+	}
+	if len(s0) != 2 {
+		t.Fatalf("Duplicate documents doesn't work: %v", s0)
 	}
 }
