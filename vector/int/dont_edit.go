@@ -20,6 +20,9 @@ func New(cap int) *Vector {
 }
 
 func (a *Vector) Delete(idx int) {
+	if idx >= a.Len {
+		panic("Index is bigger than length")
+	}
 	if a.Len < len(a.vector)*3/4 {
 		newVector := make([]int, int(math.Ceil(float64(len(a.vector))*3/4)))
 		if idx > 0 {
@@ -41,6 +44,9 @@ func (a *Vector) Delete(idx int) {
 }
 
 func (a *Vector) Insert(idx int, x int) {
+	if idx > a.Len {
+		panic("Index is bigger than length")
+	}
 	if a.Len == len(a.vector) {
 		newVector := make([]int, 0)
 		if len(a.vector) == 0 {
