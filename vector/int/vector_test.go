@@ -13,6 +13,19 @@ func TestPop(t *testing.T) {
 	if vec.Pop() != 12 {
 		t.Fatalf("Pop doesn't work: %v", vec)
 	}
+	if vec.Pop() != 11 {
+		t.Fatalf("Pop doesn't work: %v", vec)
+	}
+	if vec.Pop() != 10 {
+		t.Fatalf("Pop doesn't work: %v", vec)
+	}
+	vec.Push(13)
+	vec.Insert(0, 15)
+	vec.Insert(1, 14)
+	vec.Delete(0)
+	if vec.Get(0) != 14 {
+		t.Fatalf("Delete doesn't work: %v", vec)
+	}
 }
 
 func TestInsert(t *testing.T) {

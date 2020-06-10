@@ -27,16 +27,16 @@ func (a *Vector) Delete(idx int) {
 		newVector := make([]int, int(math.Ceil(float64(len(a.vector))*3/4)))
 		if idx > 0 {
 			for i := 0; i < idx; i++ {
-				newVector[idx] = a.vector[idx]
+				newVector[i] = a.vector[i]
 			}
 		}
 		for i := idx; i < a.Len-1; i++ {
-			newVector[idx] = a.vector[idx+1]
+			newVector[i] = a.vector[i+1]
 		}
 		a.vector = newVector
 	} else {
 		for i := idx; i < a.Len-1; i++ {
-			a.vector[idx] = a.vector[idx+1]
+			a.vector[i] = a.vector[i+1]
 		}
 		a.vector[a.Len-1] = 0
 	}
