@@ -23,8 +23,8 @@ func New(cap int) *Vector {
 }
 
 func (a *Vector) Delete(idx int) {
-	if idx >= a.Len {
-		panic("Index is bigger than length")
+	if idx >= a.Len || idx < 0 {
+		panic("Index is out of range")
 	}
 	if a.Len < len(a.vector)*3/4 {
 		newVector := make([]ValueType, int(math.Ceil(float64(len(a.vector))*3/4)))
