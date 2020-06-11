@@ -7,4 +7,5 @@ tests:
   #- ndarray
   #- maxqueue
   #- fulltext
-  - vector
+  #- vector
+  - lru
