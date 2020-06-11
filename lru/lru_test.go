@@ -60,3 +60,14 @@ func TestGetPutLRU(t *testing.T) {
 		t.Fatalf("Get recently removed key doesn't work: bool %v", ansBool2)
 	}
 }
+
+func TestSameKeys(t *testing.T) {
+	c := lru.New(3)
+	c.Put(1, 1)
+	c.Put(2, 2)
+	c.Put(1, 10)
+	ansInt0, _ := c.Get(1)
+	if ansInt0 != 10 {
+		t.Fatalf("Change values doesn't work: %v", c)
+	}
+}
