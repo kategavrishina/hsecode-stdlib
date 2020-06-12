@@ -11,6 +11,7 @@ func TestFullText(t *testing.T) {
 		"this the rat that ate the malt is",
 		"this the is the",
 		"rate the eat this jack is",
+		"rate the eat this jack is",
 	})
 	t.Log(docs)
 	s0 := docs.Search("")
@@ -27,6 +28,9 @@ func TestFullText(t *testing.T) {
 	}
 	s3 := docs.Search("is this the")
 	if s3[1] != 1 {
+		t.Fatalf("Two documents found doesn't work: %v", s3)
+	}
+	if len(s3) != 5 {
 		t.Fatalf("Two documents found doesn't work: %v", s3)
 	}
 	t.Log(s3)

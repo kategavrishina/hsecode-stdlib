@@ -39,12 +39,9 @@ func (idx *Index) Search(query string) []int {
 	wquery := strings.Split(query, " ")
 	indices := make(map[int]uint8)
 	found := make([]int, 0)
-	for i, word := range wquery {
+	for _, word := range wquery {
 		docIdx := unique(idx.idx[word])
 		for _, id := range docIdx {
-			if indices[id] < uint8(i) {
-				break
-			}
 			indices[id]++
 			if indices[id] == uint8(len(wquery)) {
 				found = append(found, id)
