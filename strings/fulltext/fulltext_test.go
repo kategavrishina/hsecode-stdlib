@@ -8,8 +8,8 @@ import (
 func TestFullText(t *testing.T) {
 	docs := fulltext.New([]string{
 		"this is the house that jack built",
-		"this is the rat that ate the malt",
-		"this is the",
+		"this the rat that ate the malt is",
+		"this the is the",
 		"rate the eat this jack is",
 	})
 	t.Log(docs)

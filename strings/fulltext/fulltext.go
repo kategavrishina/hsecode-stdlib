@@ -41,7 +41,6 @@ func (idx *Index) Search(query string) []int {
 	if query == "" {
 		return []int{}
 	}
-
 	wquery := strings.Split(query, " ")
 	length := len(wquery)
 	indices := make(map[int]int)
@@ -50,13 +49,16 @@ func (idx *Index) Search(query string) []int {
 		docIdx := unique(idx.idx[word])
 		for _, id := range docIdx {
 			indices[id]++
+			if indices[id] == length {
+				found = append(found, id)
+			}
 		}
 	}
-	for k, v := range indices {
-		if v == length {
-			found = append(found, k)
-		}
-	}
+	// for k, v := range indices {
+	//if v == length {
+	//	found = append(found, k)
+	//}
+	//}
 	// sort.Ints(found)
 	return found
 }
