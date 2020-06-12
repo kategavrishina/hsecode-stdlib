@@ -26,11 +26,10 @@ func (cache *Cache) Get(key int) (int, bool) {
 	elem, ok := cache.hash[key]
 	if !ok {
 		return 0, false
-	} else {
-		cache.elements.MoveToFront(elem)
-		val := elem.Value.(Pair)
-		return val.value, true
 	}
+	cache.elements.MoveToFront(elem)
+	val := elem.Value.(Pair).value
+	return val, true
 }
 
 func (cache *Cache) Put(key int, value int) {
@@ -41,11 +40,16 @@ func (cache *Cache) Put(key int, value int) {
 			delete(cache.hash, el.Value.(Pair).key)
 			cache.elements.Remove(el)
 		}
-		cache.elements.PushFront(Pair{key, value})
-		cache.hash[key] = cache.elements.Front()
-	} else {
-		cache.elements.Remove(elem)
-		cache.elements.PushFront(Pair{key, value})
+		cache.elements.PushFront(Pair{
+			key,
+			value,
+		})
 		cache.hash[key] = cache.elements.Front()
 	}
+	cache.elements.Remove(elem)
+	cache.elements.PushFront(Pair{
+		key,
+		value,
+	})
+	cache.hash[key] = cache.elements.Front()
 }
