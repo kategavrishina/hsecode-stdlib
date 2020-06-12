@@ -9,7 +9,10 @@ func TestFullText(t *testing.T) {
 	docs := fulltext.New([]string{
 		"this is the house that jack built",
 		"this is the rat that ate the malt",
+		"this is the",
+		"rate the eat this jack is",
 	})
+	t.Log(docs)
 	s0 := docs.Search("")
 	if len(s0) > 0 {
 		t.Fatalf("Empty search doesn't work: %v", s0)
@@ -23,9 +26,10 @@ func TestFullText(t *testing.T) {
 		t.Fatalf("One document found doesn't work: %v", s2)
 	}
 	s3 := docs.Search("is this the")
-	if len(s3) != 2 {
+	if s3[1] != 1 {
 		t.Fatalf("Two documents found doesn't work: %v", s3)
 	}
+	t.Log(s3)
 }
 
 func TestDuplicate(t *testing.T) {

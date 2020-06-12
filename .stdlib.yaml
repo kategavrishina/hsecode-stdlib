@@ -6,6 +6,6 @@ tests:
   #- primes
   #- ndarray
   #- maxqueue
-  #- fulltext
+  - fulltext
   #- vector
-  - lru
+  #- lru
