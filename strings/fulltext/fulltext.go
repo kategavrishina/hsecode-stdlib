@@ -1,7 +1,6 @@
 package fulltext
 
 import (
-	//"sort"
 	"strings"
 )
 
@@ -30,10 +29,6 @@ func New(docs []string) *Index {
 			idx.idx[word] = append(idx.idx[word], i)
 		}
 	}
-	// for k, v := range idx.idx {
-	// sort.Ints(v)
-	// idx.idx[k] = unique(v)
-	// }
 	return idx
 }
 
@@ -42,23 +37,19 @@ func (idx *Index) Search(query string) []int {
 		return []int{}
 	}
 	wquery := strings.Split(query, " ")
-	length := len(wquery)
-	indices := make(map[int]int)
+	indices := make(map[int]uint8)
 	found := make([]int, 0)
-	for _, word := range wquery {
+	for i, word := range wquery {
 		docIdx := unique(idx.idx[word])
 		for _, id := range docIdx {
+			if indices[id] < uint8(i) {
+				break
+			}
 			indices[id]++
-			if indices[id] == length {
+			if indices[id] == uint8(len(wquery)) {
 				found = append(found, id)
 			}
 		}
 	}
-	// for k, v := range indices {
-	//if v == length {
-	//	found = append(found, k)
-	//}
-	//}
-	// sort.Ints(found)
 	return found
 }
