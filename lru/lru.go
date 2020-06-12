@@ -38,7 +38,6 @@ func (cache *Cache) Put(key int, value int) {
 	if !ok {
 		if cache.elements.Len() == cache.cap {
 			el := cache.elements.Back()
-			delete(cache.hash, el.Value.(Pair).key)
 			cache.elements.Remove(el)
 			cache.elements.PushFront(Pair{key, value})
 			cache.hash[key] = cache.elements.Front()
