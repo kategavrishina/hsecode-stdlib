@@ -8,4 +8,5 @@ tests:
   #- maxqueue
   #- fulltext
   #- vector
-  - lru
+  #- lru
+  - nthelement

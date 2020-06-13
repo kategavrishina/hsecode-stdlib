@@ -8,5 +8,5 @@ type Ordered interface {
 }
 
 func FirstN(data Ordered, n int) []int {
-
+	return []int{}
 }
