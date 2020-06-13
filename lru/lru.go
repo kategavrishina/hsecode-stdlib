@@ -24,12 +24,12 @@ func New(capacity int) *Cache {
 
 func (cache *Cache) Get(key int) (int, bool) {
 	elem, ok := cache.hash[key]
-	if !ok {
-		return 0, false
+	if ok {
+		cache.elements.MoveToFront(elem)
+		val := elem.Value.(Pair).value
+		return val, true
 	}
-	cache.elements.MoveToFront(elem)
-	val := elem.Value.(Pair).value
-	return val, true
+	return 0, false
 }
 
 func (cache *Cache) Put(key int, value int) {
@@ -46,11 +46,13 @@ func (cache *Cache) Put(key int, value int) {
 		})
 		cache.hash[key] = cache.elements.Front()
 	} else {
-		cache.elements.MoveToFront(elem)
-		elem.Value = Pair{
-			key,
-			value,
+		if elem.Value.(Pair).value != value {
+			elem.Value = Pair{
+				key,
+				value,
+			}
 		}
+		cache.elements.MoveToFront(elem)
 		cache.hash[key] = cache.elements.Front()
 	}
 }
