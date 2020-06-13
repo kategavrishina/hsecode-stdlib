@@ -46,20 +46,11 @@ func (cache *Cache) Put(key int, value int) {
 		})
 		cache.hash[key] = cache.elements.Front()
 	} else {
-		if elem.Value.(Pair).value != value {
-			/*
-				cache.elements.Remove(elem)
-				cache.elements.PushFront(Pair{
-					key,
-					value,
-				})
-			*/
-			elem.Value = Pair{
-				key,
-				value,
-			}
-		}
 		cache.elements.MoveToFront(elem)
+		elem.Value = Pair{
+			key,
+			value,
+		}
 		cache.hash[key] = cache.elements.Front()
 	}
 }
