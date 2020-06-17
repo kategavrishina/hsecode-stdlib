@@ -40,11 +40,6 @@ func FirstN(data Ordered, n int) []int {
 		}
 		return allInds
 	}
-	if data.Len() > n {
-		for i := n; i < data.Len(); i++ {
-			allInds = append(allInds, i)
-		}
-	}
 	h := Heap{
 		indices: make([]int, 0),
 		data:    data,
