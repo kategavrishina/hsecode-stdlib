@@ -44,7 +44,6 @@ func FirstN(data Ordered, n int) []int {
 		indices: make([]int, 0),
 		data:    data,
 	}
-	heap.Init(&h)
 	for j := 0; j < n; j++ {
 		heap.Push(&h, j)
 	}
