@@ -51,7 +51,7 @@ func FirstN(data Ordered, n int) []int {
 		if !data.Less(h.indices[0], i) {
 			heap.Remove(&h, 0)
 			heap.Push(&h, i)
-			heap.Fix(&h, n-1)
+			//heap.Fix(&h, n-1)
 		}
 	}
 	return h.indices
