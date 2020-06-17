@@ -34,11 +34,16 @@ type Ordered interface {
 
 func FirstN(data Ordered, n int) []int {
 	var allInds []int
-	for i := 0; i < data.Len(); i++ {
-		allInds = append(allInds, i)
-	}
 	if data.Len() <= n {
+		for i := 0; i < data.Len(); i++ {
+			allInds = append(allInds, i)
+		}
 		return allInds
+	}
+	if data.Len() > n {
+		for i := n; i < data.Len(); i++ {
+			allInds = append(allInds, i)
+		}
 	}
 	h := Heap{
 		indices: make([]int, 0),
@@ -47,7 +52,7 @@ func FirstN(data Ordered, n int) []int {
 	for j := 0; j < n; j++ {
 		heap.Push(&h, j)
 	}
-	for i := n; i < len(allInds); i++ {
+	for i := n; i < data.Len(); i++ {
 		if !data.Less(h.indices[0], i) {
 			heap.Remove(&h, 0)
 			heap.Push(&h, i)
