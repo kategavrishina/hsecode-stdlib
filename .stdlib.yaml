@@ -9,4 +9,5 @@ tests:
   #- fulltext
   #- vector
   #- lru
-  - nthelement
+  #- nthelement
+  - firstn
