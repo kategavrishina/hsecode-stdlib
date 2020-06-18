@@ -2,6 +2,7 @@ package bitset
 
 import (
 	"errors"
+	"math"
 	"math/bits"
 )
 
@@ -38,11 +39,17 @@ func (b *Bitset) Count() int {
 
 func (b *Bitset) Flip() {
 	for i := range b.bits {
-		for j := 0; j < 64; j++ {
-			if b.bits[i]&(1<<(j)) == 1 {
-				b.bits[i] &^= 1 << (j)
-			} else {
-				b.bits[i] |= 1 << (j)
+		if b.bits[i] == math.MaxUint64 {
+			b.bits[i] = 0
+		} else if b.bits[i] == 0 {
+			b.bits[i] = math.MaxUint64
+		} else {
+			for j := 0; j < 64; j++ {
+				if b.bits[i]&(1<<(j)) == 1 {
+					b.bits[i] &^= 1 << (j)
+				} else {
+					b.bits[i] |= 1 << (j)
+				}
 			}
 		}
 	}
