@@ -6,9 +6,9 @@ tests:
   #- primes
   #- ndarray
   #- maxqueue
-  #- fulltext
+  #- fulltext не получается
   #- vector
   #- lru
   #- nthelement
   #- firstn
-  - bitset
+  #- bitset
