@@ -16,14 +16,12 @@ func NewBST(elements []int) *Tree {
 }
 
 func fromSorted(unique []int) *Tree {
-	if len(unique) > 0 {
-		mid := len(unique) / 2
-		return &Tree{
-			Value: unique[mid],
-			Left:  NewBST(unique[:mid]),
-			Right: NewBST(unique[mid+1:]),
-		}
-	} else {
+	if len(unique) == 0 {
 		return nil
 	}
+	mid := len(unique) / 2
+	return &Tree{
+		Value: unique[mid],
+		Left:  NewBST(unique[:mid]),
+		Right: NewBST(unique[mid+1:])}
 }
