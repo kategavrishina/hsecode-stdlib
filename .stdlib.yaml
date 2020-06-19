@@ -12,5 +12,8 @@ tests:
   #- nthelement
   #- firstn
   #- bitset
-  - treebalanced
+  #- treebalanced
   #- treeinorder
+  - treesym
+  #- treeserialise
+  #- treenoleft
