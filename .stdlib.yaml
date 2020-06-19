@@ -13,4 +13,4 @@ tests:
   #- firstn
   #- bitset
   - treebalanced
-  - treeinorder
+  #- treeinorder

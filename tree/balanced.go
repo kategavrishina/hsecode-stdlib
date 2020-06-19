@@ -22,6 +22,6 @@ func fromSorted(unique []int) *Tree {
 	mid := len(unique) / 2
 	return &Tree{
 		Value: unique[mid],
-		Left:  NewBST(unique[:mid]),
-		Right: NewBST(unique[mid+1:])}
+		Left:  fromSorted(unique[:mid]),
+		Right: fromSorted(unique[mid+1:])}
 }
