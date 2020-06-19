@@ -24,7 +24,6 @@ func fromSorted(unique []int) *Tree {
 			Right: NewBST(unique[mid+1:]),
 		}
 	} else {
-		var emptyTree *Tree
-		return emptyTree
+		return nil
 	}
 }
