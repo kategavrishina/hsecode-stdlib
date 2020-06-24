@@ -16,14 +16,14 @@ func isWord(w string) bool {
 		}
 		return true
 	*/
-	if w != "abcd" {
-		return false
-	} else {
+	if w == "abcd" || w == "abc" || w == "aaa" || w == "bc" {
 		return true
+	} else {
+		return false
 	}
 }
 
 func TestSegmentation(t *testing.T) {
-	answer, err := strings.Segmentation("abcdabcdabcd", isWord)
+	answer, err := strings.Segmentation("aaaaaabcaaaaaabc", isWord)
 	t.Log(answer, err)
 }
