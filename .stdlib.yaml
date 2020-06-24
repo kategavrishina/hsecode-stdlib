@@ -17,4 +17,5 @@ tests:
   #- treesym
   #- treeserialise
   #- treenoleft
-  - graph
+  #- graph
+  - segmentation
