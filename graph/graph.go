@@ -79,14 +79,19 @@ func (g *Graph) Nodes(f func(Node)) {
 }
 
 func (g *Graph) Edges(f func(u, v Node, edgeData interface{})) {
-	visited := make(map[int]bool)
-	for i := range g.edges {
-		for j := range g.edges[i] {
-			if !visited[j] {
+	if g.Type == Directed {
+		for i := range g.edges {
+			for j := range g.edges[i] {
 				f(g.hash[i], g.hash[j], g.edges[i][j])
-				visited[i] = true
-				if g.Type == Directed {
-					f(g.hash[j], g.hash[i], g.edges[j][i])
+			}
+		}
+	} else {
+		visited := make(map[int]bool)
+		for i := range g.edges {
+			for j := range g.edges[i] {
+				if !visited[j] {
+					f(g.hash[i], g.hash[j], g.edges[i][j])
+					visited[i] = true
 				}
 			}
 		}

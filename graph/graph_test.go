@@ -43,9 +43,15 @@ func TestGraph_Edges(t *testing.T) {
 	g := graph.New(graph.Directed)
 	g.AddNode(Int(2))
 	g.AddNode(Int(3))
+	g.AddNode(Int(4))
+	g.AddNode(Int(5))
 
 	g.AddEdge(2, 3, "forward edge")
 	g.AddEdge(3, 2, "backward edge")
+	g.AddEdge(2, 4, "forward edge")
+	g.AddEdge(4, 2, "backward edge")
+	g.AddEdge(5, 3, "another edge")
+	g.AddEdge(4, 5, "another edge")
 
 	g.Edges(func(u, v graph.Node, e interface{}) {
 		fmt.Println(u, v, e)
