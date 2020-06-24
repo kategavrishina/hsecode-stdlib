@@ -3,6 +3,9 @@ package strings
 import "errors"
 
 func Segmentation(s string, isWord func(w string) bool) ([]string, error) {
+	if len(s) == 0 {
+		return []string{}, nil
+	}
 	n := len(s)
 	split := make([]bool, len(s)+1)
 	split[n] = true
@@ -17,10 +20,11 @@ func Segmentation(s string, isWord func(w string) bool) ([]string, error) {
 	if !split[0] {
 		return nil, errors.New("string is unsplittable")
 	} else {
-		start := 0
+		start, end := 0, 0
 		for i, j := range split {
 			if j {
-				result = append(result, s[start:i])
+				end = i
+				result = append(result, s[start:end])
 				start = i
 			}
 		}

@@ -6,16 +6,6 @@ import (
 )
 
 func isWord(w string) bool {
-	/*
-		for i := range w {
-			for j := range w {
-				if j != i {
-					return false
-				}
-			}
-		}
-		return true
-	*/
 	if w == "abcd" || w == "abc" || w == "aaa" || w == "bc" {
 		return true
 	} else {
@@ -24,6 +14,6 @@ func isWord(w string) bool {
 }
 
 func TestSegmentation(t *testing.T) {
-	answer, err := strings.Segmentation("aaaaaabcaaaaaabc", isWord)
-	t.Log(answer, err)
+	answer, _ := strings.Segmentation("abcdaaabcaaabc", isWord)
+	t.Log(answer)
 }
