@@ -29,5 +29,5 @@ func Segmentation(s string, isWord func(w string) bool) ([]string, error) {
 			}
 		}
 	}
-	return result, nil
+	return result[1:], nil
 }

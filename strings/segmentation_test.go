@@ -18,4 +18,6 @@ func TestSegmentation(t *testing.T) {
 	t.Log(answer)
 	answer, _ = strings.Segmentation("aaaaaaaabcaaaaaaaaaaaaaaaaaaaaaabcdaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcdaaaaaaaaaaaaaaaaabcbcbcbcbcbcaaaaaaabcd", isWord)
 	t.Log(answer)
+	answer, _ = strings.Segmentation("abcd", isWord)
+	t.Log(answer)
 }
