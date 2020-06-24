@@ -20,12 +20,12 @@ func Segmentation(s string, isWord func(w string) bool) ([]string, error) {
 	if !split[0] {
 		return nil, errors.New("string is unsplittable")
 	} else {
-		start, end := 0, 0
+		l, r := 0, 0
 		for i, j := range split {
 			if j {
-				end = i
-				result = append(result, s[start:end])
-				start = i
+				r = i
+				result = append(result, s[l:r])
+				l = i
 			}
 		}
 	}
