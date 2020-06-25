@@ -21,3 +21,9 @@ func TestSegmentation(t *testing.T) {
 	answer, _ = strings.Segmentation("abcd", isWord)
 	t.Log(answer)
 }
+
+func TestLCS(t *testing.T) {
+	t.Log(strings.LCS("vintner", "writers"))
+	t.Log(strings.LCS("ABCD", "ACBAD"))
+	t.Log(strings.LCS("A", "ABCDEFG"))
+}

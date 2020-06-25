@@ -18,4 +18,5 @@ tests:
   #- treeserialise
   #- treenoleft
   #- graph
-  - segmentation
+  #- segmentation
+  - lcs
