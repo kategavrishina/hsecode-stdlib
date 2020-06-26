@@ -13,13 +13,11 @@ type Levenshtein struct {
 	dst string
 }
 
-func min(x, y, z int) int {
-	if x <= y && x <= z {
+func min(x, y int) int {
+	if x < y {
 		return x
-	} else if y <= z && y <= x {
-		return y
 	}
-	return z
+	return y
 }
 
 func New(src, dst string) *Levenshtein {
@@ -41,7 +39,7 @@ func New(src, dst string) *Levenshtein {
 				ins := L[j][i-1]
 				del := L[j-1][i]
 				rep := L[j-1][i-1]
-				L[j][i] = min(rep, del, ins) + 1
+				L[j][i] = min(rep, min(del, ins)) + 1
 			}
 		}
 	}
@@ -65,16 +63,14 @@ func (ls *Levenshtein) Transcript() string {
 	n := ls.n - 1
 	result := make([]string, 0)
 	for i, j := m, n; !(i < 0 || j < 0) && !(i == 0 && j == 0); {
-		if j == 0 && i != 0 {
+		if j == 0 {
 			result = append(result, "D")
 			i--
-		} else if i == 0 && j != 0 {
+		} else if i == 0 {
 			result = append(result, "I")
 			j--
-		} else if i == 0 && j == 0 {
-			break
 		} else {
-			minimum := min(L[j-1][i-1], L[j-1][i], L[j][i-1])
+			minimum := min(L[j-1][i-1], min(L[j-1][i], L[j][i-1]))
 			if ls.src[i-1] == ls.dst[j-1] {
 				result = append(result, "M")
 				i--
