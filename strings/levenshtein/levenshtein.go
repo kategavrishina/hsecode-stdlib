@@ -27,12 +27,10 @@ func New(src, dst string) *Levenshtein {
 	for i := range L {
 		L[i] = make([]int, m)
 	}
-	for j := 0; j < n; j++ {
-		L[j][0] = j
-	}
 	for i := 1; i < m; i++ {
 		L[0][i] = i
 		for j := 1; j < n; j++ {
+			L[j][0] = j
 			if src[i-1] == dst[j-1] {
 				L[j][i] = L[j-1][i-1]
 			} else {
@@ -81,12 +79,12 @@ func (ls *Levenshtein) Transcript() string {
 			} else if minimum == L[j][i-1] {
 				result = append(result, "D")
 				i--
-			} else if L[j-1][i-1] == L[j][i] {
-				result = append(result, "M")
-				i--
-				j--
 			} else {
-				result = append(result, "R")
+				if L[j-1][i-1] == L[j][i] {
+					result = append(result, "M")
+				} else {
+					result = append(result, "R")
+				}
 				i--
 				j--
 			}
