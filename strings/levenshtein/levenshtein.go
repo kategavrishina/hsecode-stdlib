@@ -56,7 +56,7 @@ func New(src, dst string) *Levenshtein {
 }
 
 func (ls *Levenshtein) Distance() int {
-	return ls.L[ls.m-1][ls.n-1]
+	return ls.L[ls.n-1][ls.m-1]
 	// return ls.L
 }
 
