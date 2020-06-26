@@ -54,8 +54,9 @@ func New(src, dst string) *Levenshtein {
 	}
 }
 
-func (ls *Levenshtein) Distance() int {
-	return ls.L[ls.n-1][ls.m-1]
+func (ls *Levenshtein) Distance() [][]int {
+	//return ls.L[ls.n-1][ls.m-1]
+	return ls.L
 }
 
 func (ls *Levenshtein) Transcript() string {
@@ -63,15 +64,15 @@ func (ls *Levenshtein) Transcript() string {
 	m := ls.m - 1
 	n := ls.n - 1
 	result := make([]string, 0)
-	for i, j := m, n; !(i == 0 && j == 0) && (i > 0 || j > 0); {
+	for i, j := m, n; !(i < 0 || j < 0) && !(i == 0 && j == 0); {
 		if j == 0 && i != 0 {
 			result = append(result, "D")
 			i--
-			j--
 		} else if i == 0 && j != 0 {
 			result = append(result, "I")
-			i--
 			j--
+		} else if i == 0 && j == 0 {
+			break
 		} else {
 			minimum := min(L[j-1][i-1], L[j-1][i], L[j][i-1])
 			if ls.src[i-1] == ls.dst[j-1] {
