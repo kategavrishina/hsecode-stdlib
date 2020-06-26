@@ -63,7 +63,7 @@ func (ls *Levenshtein) Transcript() string {
 	m := ls.m - 1
 	n := ls.n - 1
 	result := make([]string, 0)
-	for i, j := m, n; i > 0 || j > 0; {
+	for i, j := m, n; !(i == 0 && j == 0) && (i > 0 || j > 0); {
 		if j == 0 && i != 0 {
 			result = append(result, "D")
 			i--

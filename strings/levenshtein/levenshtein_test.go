@@ -14,6 +14,6 @@ func TestLevenshtein_Transcript(t *testing.T) {
 	ls := levenshtein.New("algorithm", "altruistic")
 	t.Log(ls.Transcript())
 	t.Log(len(ls.Transcript()))
-	ls = levenshtein.New("vintner", "writers")
+	ls = levenshtein.New("fg", "gd")
 	t.Log(ls.Transcript())
 }
