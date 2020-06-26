@@ -1,7 +1,6 @@
 package strings
 
 import (
-	"math"
 	"strings"
 )
 
@@ -17,7 +16,11 @@ func LCS(s1, s2 string) string {
 			if s1[i] == s2[j] {
 				C[i+1][j+1] = C[i][j] + 1
 			} else {
-				C[i+1][j+1] = int(math.Max(float64(C[i+1][j]), float64(C[i][j+1])))
+				if C[i+1][j] >= C[i][j+1] {
+					C[i+1][j+1] = C[i+1][j]
+				} else {
+					C[i+1][j+1] = C[i][j+1]
+				}
 			}
 		}
 	}
