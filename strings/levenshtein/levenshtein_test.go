@@ -6,7 +6,7 @@ import (
 )
 
 func TestLevenshtein_Distance(t *testing.T) {
-	ls := levenshtein.New("ffg", "gd")
+	ls := levenshtein.New("", "aaaaa")
 	t.Log(ls.Distance())
 }
 

@@ -27,21 +27,16 @@ func New(src, dst string) *Levenshtein {
 	for i := range L {
 		L[i] = make([]int, m)
 	}
-	/*for j := 0; j < n; j++ {
+	for j := 0; j < n; j++ {
 		L[j][0] = j
-	}*/
+	}
 	for i := 1; i < m; i++ {
 		L[0][i] = i
-		for j := 0; j < n; j++ {
-			if j == 0 {
-				L[j][0] = j
-			} else if src[i-1] == dst[j-1] {
+		for j := 1; j < n; j++ {
+			if src[i-1] == dst[j-1] {
 				L[j][i] = L[j-1][i-1]
 			} else {
-				ins := L[j][i-1]
-				del := L[j-1][i]
-				rep := L[j-1][i-1]
-				L[j][i] = min(rep, min(del, ins)) + 1
+				L[j][i] = min(L[j-1][i-1], min(L[j-1][i], L[j][i-1])) + 1
 			}
 		}
 	}
