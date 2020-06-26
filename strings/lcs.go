@@ -1,7 +1,6 @@
 package strings
 
 import (
-	matrix "hsecode.com/stdlib/matrix/int"
 	"math"
 	"strings"
 )
@@ -9,19 +8,27 @@ import (
 func LCS(s1, s2 string) string {
 	m := len(s1)
 	n := len(s2)
-	C := matrix.New(m+1, n+1)
+	// C := matrix.New(m+1, n+1)
+	C := make([][]int, m+1)
+	for i := range C {
+		C[i] = make([]int, n+1)
+	}
 	for i := 0; i < m+1; i++ {
 		for j := 0; j < n+1; j++ {
 			if i == 0 || j == 0 {
-				C.Set(i, j, 0)
+				C[i][j] = 0
+				// C.Set(i, j, 0)
 			} else if s1[i-1] == s2[j-1] {
-				C.Set(i, j, C.Get(i-1, j-1)+1)
+				C[i][j] = C[i-1][j-1] + 1
+				// C.Set(i, j, C.Get(i-1, j-1)+1)
 			} else {
-				C.Set(i, j, int(math.Max(float64(C.Get(i, j-1)), float64(C.Get(i-1, j)))))
+				C[i][j] = int(math.Max(float64(C[i][j-1]), float64(C[i-1][j])))
+				// C.Set(i, j, int(math.Max(float64(C.Get(i, j-1)), float64(C.Get(i-1, j)))))
 			}
 		}
 	}
-	index := C.Get(m, n)
+	// index := C.Get(m, n)
+	index := C[m][n]
 	if index == 0 {
 		return ""
 	}
@@ -36,7 +43,8 @@ func LCS(s1, s2 string) string {
 			i--
 			j--
 			index--
-		} else if C.Get(i, j-1) > C.Get(i-1, j) {
+			// } else if C.Get(i, j-1) > C.Get(i-1, j) {
+		} else if C[i][j-1] > C[i-1][j] {
 			j--
 		} else {
 			i--
