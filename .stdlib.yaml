@@ -19,4 +19,5 @@ tests:
   #- treenoleft
   #- graph
   #- segmentation
-  - lcs
+  #- lcs
+  - levenshtein
