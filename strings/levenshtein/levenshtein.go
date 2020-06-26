@@ -81,12 +81,12 @@ func (ls *Levenshtein) Transcript() string {
 			} else if minimum == L[j][i-1] {
 				result = append(result, "D")
 				i--
+			} else if L[j-1][i-1] == L[j][i] {
+				result = append(result, "M")
+				i--
+				j--
 			} else {
-				if L[j-1][i-1] == L[j][i] {
-					result = append(result, "M")
-				} else {
-					result = append(result, "R")
-				}
+				result = append(result, "R")
 				i--
 				j--
 			}
