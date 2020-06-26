@@ -46,7 +46,7 @@ func LCS(s1, s2 string) string {
 			i--
 		}
 	}
-	return strings.Join(result, "")
+	return strings.Join(result[:len(result)-1], "")
 }
 
 /*

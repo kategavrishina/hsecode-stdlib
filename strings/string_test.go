@@ -26,4 +26,5 @@ func TestLCS(t *testing.T) {
 	t.Log(strings.LCS("vintner", "writers"))
 	t.Log(strings.LCS("ABCD", "ACBAD"))
 	t.Log(len(strings.LCS("H", "ABCDEFG")))
+	t.Log(strings.LCS("cwgbbclcjpc", "vtvzpzwwejz"))
 }
