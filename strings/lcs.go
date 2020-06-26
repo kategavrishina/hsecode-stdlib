@@ -3,6 +3,7 @@ package strings
 import (
 	matrix "hsecode.com/stdlib/matrix/int"
 	"math"
+	"strings"
 )
 
 func LCS(s1, s2 string) string {
@@ -24,6 +25,28 @@ func LCS(s1, s2 string) string {
 			}
 		}
 	}
+	index := C.Get(m, n)
+	result := make([]string, index+1)
+	result[index] = "\000"
+
+	i := m
+	j := n
+	for i > 0 && j > 0 {
+		if s1[i-1] == s2[j-1] {
+			result[index-1] = string(s1[i-1])
+			i--
+			j--
+			index--
+		} else if C.Get(i, j-1) > C.Get(i-1, j) {
+			j--
+		} else {
+			i--
+		}
+	}
+	return strings.Join(result, "")
+}
+
+/*
 	return Backtrack(C, s1, s2, m, n)
 }
 
@@ -39,3 +62,4 @@ func Backtrack(C *matrix.Matrix, s1, s2 string, i, j int) string {
 	}
 	return Backtrack(C, s1, s2, i-1, j)
 }
+*/
