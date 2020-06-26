@@ -27,4 +27,5 @@ func TestLCS(t *testing.T) {
 	t.Log(strings.LCS("ABCD", "ACBAD"))
 	t.Log(len(strings.LCS("H", "ABCDEFG")))
 	t.Log(strings.LCS("cwgbbclcjpc", "vtvzpzwwejz"))
+	t.Log(strings.LCS("aeoxdejmm;cslvkbrucxl;,'xmeniubsyrfxkdl,zpexuorucjkclzpkoiujkl,;z.p[oinutrkl,zpworiuyjkhugytfgljiolynkluhigyuftolikuyjtredfghbjklizdvfjh[oighkjvnzc;kvjd[foiguahf;zcxlvn'lfijg[aiogu[afodivhdfknvbjhlkvgypiurytqeqghdk;ah;aoighrrrrrai;hlknjgliytperiytperytyqpiuerligh;aih", "dfvghbjkijouiytyrtedxcfvbhjnkijuiyutyrdtesdcvbnjsirxfn;aou/zlougrbt;rofc;zoiufk.zjhg.lwirt[pewripeutocsednug;slkb.xkgjbvh.cit;axout[pqrpeti[reaakml,uytrewesxdcfvbhnjkml,'lkopiojiuhyugyttrr"))
 }
