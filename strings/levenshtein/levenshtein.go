@@ -1,7 +1,6 @@
 package levenshtein
 
 import (
-	"math"
 	"strings"
 )
 
@@ -42,7 +41,7 @@ func New(src, dst string) *Levenshtein {
 				ins := L[j][i-1]
 				del := L[j-1][i]
 				rep := L[j-1][i-1]
-				L[j][i] = int(math.Min(float64(rep), math.Min(float64(ins), float64(del)))) + 1
+				L[j][i] = min(rep, del, ins) + 1
 			}
 		}
 	}
@@ -57,62 +56,44 @@ func New(src, dst string) *Levenshtein {
 
 func (ls *Levenshtein) Distance() int {
 	return ls.L[ls.n-1][ls.m-1]
-	// return ls.L
 }
 
 func (ls *Levenshtein) Transcript() string {
 	L := ls.L
 	m := ls.m - 1
 	n := ls.n - 1
-	if m == 0 {
-		return strings.Repeat("I", n)
-	}
-	if n == 0 {
-		return strings.Repeat("D", m)
-	}
 	result := make([]string, 0)
-	for i, j := m, n; i > 0 && j > 0; {
-		current := L[j][i]
-		upperLeft := L[j-1][i-1]
-		left := L[j-1][i]
-		upper := L[j][i-1]
-		minimum := min(upperLeft, left, upper)
-		if ls.src[i-1] == ls.dst[j-1] {
-			result = append(result, "M")
-			i--
-			j--
-		} else if minimum == left {
-			result = append(result, "I")
-			j--
-		} else if minimum == upper {
+	for i, j := m, n; i > 0 || j > 0; {
+		if j == 0 && i != 0 {
 			result = append(result, "D")
 			i--
-		} else {
-			if upperLeft == current {
-				result = append(result, "M")
-			} else {
-				result = append(result, "R")
-			}
+			j--
+		} else if i == 0 && j != 0 {
+			result = append(result, "I")
 			i--
 			j--
-		}
-		/*
+		} else {
+			minimum := min(L[j-1][i-1], L[j-1][i], L[j][i-1])
 			if ls.src[i-1] == ls.dst[j-1] {
 				result = append(result, "M")
 				i--
 				j--
-			} else if minimum == left {
-				result = append(result, "D")
-				i--
-			} else if minimum == upper {
+			} else if minimum == L[j-1][i] {
 				result = append(result, "I")
 				j--
+			} else if minimum == L[j][i-1] {
+				result = append(result, "D")
+				i--
 			} else {
-				result = append(result, "R")
+				if L[j-1][i-1] == L[j][i] {
+					result = append(result, "M")
+				} else {
+					result = append(result, "R")
+				}
 				i--
 				j--
 			}
-		*/
+		}
 	}
 	converted := make([]string, len(result))
 	for l := len(result); l > 0; l-- {

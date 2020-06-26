@@ -6,7 +6,7 @@ import (
 )
 
 func TestLevenshtein_Distance(t *testing.T) {
-	ls := levenshtein.New("algorithm", "altruistic")
+	ls := levenshtein.New("fg", "gd")
 	t.Log(ls.Distance())
 }
 
@@ -14,6 +14,6 @@ func TestLevenshtein_Transcript(t *testing.T) {
 	ls := levenshtein.New("algorithm", "altruistic")
 	t.Log(ls.Transcript())
 	t.Log(len(ls.Transcript()))
-	ls = levenshtein.New("abcdef", "azced")
+	ls = levenshtein.New("vintner", "writers")
 	t.Log(ls.Transcript())
 }
