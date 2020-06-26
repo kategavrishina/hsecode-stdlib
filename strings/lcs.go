@@ -26,6 +26,9 @@ func LCS(s1, s2 string) string {
 		}
 	}
 	index := C.Get(m, n)
+	if index == 0 {
+		return ""
+	}
 	result := make([]string, index+1)
 	result[index] = "\000"
 

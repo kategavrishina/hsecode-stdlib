@@ -25,5 +25,5 @@ func TestSegmentation(t *testing.T) {
 func TestLCS(t *testing.T) {
 	t.Log(strings.LCS("vintner", "writers"))
 	t.Log(strings.LCS("ABCD", "ACBAD"))
-	t.Log(strings.LCS("A", "ABCDEFG"))
+	t.Log(len(strings.LCS("H", "ABCDEFG")))
 }
