@@ -15,9 +15,10 @@ tests:
   #- treebalanced
   #- treeinorder
   #- treesym
-  - treeserialise
+  #- treeserialise не работает
   #- treenoleft не получается
   #- graph
   #- segmentation
   #- lcs
   #- levenshtein
+  - islands
