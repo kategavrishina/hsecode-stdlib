@@ -15,9 +15,9 @@ tests:
   #- treebalanced
   #- treeinorder
   #- treesym
-  #- treeserialise
-  #- treenoleft
+  - treeserialise
+  #- treenoleft не получается
   #- graph
   #- segmentation
   #- lcs
-  - levenshtein
+  #- levenshtein
