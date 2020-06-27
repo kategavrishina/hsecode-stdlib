@@ -15,7 +15,7 @@ func TestEncode(t *testing.T) {
 }
 
 func TestDecode(t *testing.T) {
-	T, _ := Decode([]string{"2", "1", "3", "nil", "nil", "nil", "10"})
+	T, err := Decode([]string{"2", "1", "3", "nil", "nil", "nil", "10"})
 
 	// Resulting tree:
 	//    2
@@ -23,6 +23,6 @@ func TestDecode(t *testing.T) {
 	//  1    3
 	//        \
 	//         10
-
+	t.Log(err)
 	T.InOrder(func(node *Tree) { fmt.Println(node.Value) })
 }

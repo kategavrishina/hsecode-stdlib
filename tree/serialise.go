@@ -39,6 +39,9 @@ func (T *Tree) Encode() []string {
 }
 
 func Decode(data []string) (*Tree, error) {
+	if len(data) == 0 {
+		return nil, nil
+	}
 	value, err := strconv.Atoi(data[0])
 	if err != nil {
 		return nil, errors.New("first element is incorrect")
@@ -62,17 +65,26 @@ func Helper(data []string, idx int) (*Tree, error) {
 	if idx >= len(data) {
 		return nil, nil
 	}
-	if data[idx] == "nil" {
-		return nil, nil
-	}
 	if value, err := strconv.Atoi(data[idx]); err == nil {
-		left, _ := Helper(data, idx*2+1)
-		right, _ := Helper(data, idx*2+2)
+		left, errL := Helper(data, idx*2+1)
+		if errL != nil {
+			return nil, errL
+		}
+		right, errR := Helper(data, idx*2+2)
+		if errR != nil {
+			return nil, errR
+		}
 		return &Tree{
 			value,
 			left,
 			right,
 		}, nil
+	} else if data[idx] == "nil" {
+		if idx*2+1 >= len(data) && idx*2+2 >= len(data) {
+			return nil, nil
+		} else {
+			return nil, errors.New("non-nil node is child of nil")
+		}
 	} else {
 		return nil, errors.New("element is not nil nor integer")
 	}
