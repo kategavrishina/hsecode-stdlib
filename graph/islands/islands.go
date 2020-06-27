@@ -4,21 +4,16 @@ import "hsecode.com/stdlib/matrix/int"
 
 func Count(grid *matrix.Matrix) int {
 	numOfIslands := 0
-	// Initialize 2D matrix.
-
 	// For each cell - we perform dfs.
 	for x := 0; x < grid.Rows; x++ {
 		for y := 0; y < grid.Cols; y++ {
 			// Skip performing dfs from water.
-			if grid.Get(x, y) == 0 {
-				continue
+			if grid.Get(x, y) != 0 {
+				islandDFS(grid, x, y)
+				numOfIslands++
 			}
-			// DFS will mark all connected land from this cell as visited.
-			islandDFS(grid, x, y)
-			numOfIslands++
 		}
 	}
-
 	return numOfIslands
 }
 
@@ -35,18 +30,15 @@ func islandDFS(grid *matrix.Matrix, x, y int) {
 	// Mark current cell as visited.
 	grid.Set(x, y, 0)
 
-	// A neighbor can be traversed to (top, bottom, right, left).
-	for _, direction := range getDirections() {
-		dx, dy := direction[0], direction[1]
-		islandDFS(grid, x+dx, y+dy)
-	}
-}
-
-func getDirections() [][]int {
-	return [][]int{
+	directions := [][]int{
 		{-1, 0},
 		{1, 0},
 		{0, -1},
 		{0, 1},
+	}
+	// A neighbor can be traversed to (top, bottom, right, left).
+	for _, direction := range directions {
+		dx, dy := direction[0], direction[1]
+		islandDFS(grid, x+dx, y+dy)
 	}
 }
