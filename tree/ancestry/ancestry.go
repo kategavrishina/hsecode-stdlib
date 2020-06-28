@@ -29,12 +29,8 @@ func DFS(T *tree.Tree, A *Ancestry) {
 	}
 	A.Hash[T.Value] = &Time{time, 0}
 	time++
-	if T.Left != nil {
-		DFS(T.Left, A)
-	}
-	if T.Right != nil {
-		DFS(T.Right, A)
-	}
+	DFS(T.Left, A)
+	DFS(T.Right, A)
 	A.Hash[T.Value].exit = time
 	time++
 }
