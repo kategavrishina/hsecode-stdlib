@@ -30,8 +30,12 @@ func DFS(T *tree.Tree) {
 	}
 	A.Hash[T.Value] = &Time{time, 0}
 	time++
-	DFS(T.Left)
-	DFS(T.Right)
+	if T.Left != nil {
+		DFS(T.Left)
+	}
+	if T.Right != nil {
+		DFS(T.Right)
+	}
 	A.Hash[T.Value].exit = time
 	time++
 }
