@@ -5,6 +5,7 @@ import (
 )
 
 var time int
+var A *Ancestry
 
 type Ancestry struct {
 	// contains filtered or unexported fields
@@ -16,21 +17,21 @@ type Time struct {
 }
 
 func New(T *tree.Tree) *Ancestry {
-	A := &Ancestry{
+	A = &Ancestry{
 		Hash: make(map[int]*Time),
 	}
-	DFS(T, A)
+	DFS(T)
 	return A
 }
 
-func DFS(T *tree.Tree, A *Ancestry) {
+func DFS(T *tree.Tree) {
 	if T == nil {
 		return
 	}
 	A.Hash[T.Value] = &Time{time, 0}
 	time++
-	DFS(T.Left, A)
-	DFS(T.Right, A)
+	DFS(T.Left)
+	DFS(T.Right)
 	A.Hash[T.Value].exit = time
 	time++
 }
