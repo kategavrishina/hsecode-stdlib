@@ -21,4 +21,5 @@ tests:
   #- segmentation
   #- lcs
   #- levenshtein
-  - islands
+  #- islands
+  - treeancestry
