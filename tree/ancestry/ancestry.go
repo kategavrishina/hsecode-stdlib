@@ -19,14 +19,14 @@ func New(T *tree.Tree) *Ancestry {
 	A := &Ancestry{
 		Hash: make(map[int]*Time),
 	}
-	if T != nil {
-		DFS(T, A)
-		return A
-	}
-	return nil
+	DFS(T, A)
+	return A
 }
 
 func DFS(T *tree.Tree, A *Ancestry) {
+	if T == nil {
+		return
+	}
 	A.Hash[T.Value] = &Time{time, 0}
 	time++
 	if T.Left != nil {
