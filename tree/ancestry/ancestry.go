@@ -5,7 +5,6 @@ import (
 )
 
 var time int
-var A *Ancestry
 
 type Ancestry struct {
 	// contains filtered or unexported fields
@@ -17,32 +16,28 @@ type Time struct {
 }
 
 func New(T *tree.Tree) *Ancestry {
-	A = &Ancestry{
+	A := &Ancestry{
 		Hash: make(map[int]*Time),
 	}
-	DFS(T)
+	DFS(T, A)
 	return A
 }
 
-func DFS(T *tree.Tree) {
+func DFS(T *tree.Tree, A *Ancestry) {
 	if T == nil {
 		return
 	}
 	A.Hash[T.Value] = &Time{time, 0}
 	time++
-	if T.Left != nil {
-		DFS(T.Left)
-	}
-	if T.Right != nil {
-		DFS(T.Right)
-	}
+	DFS(T.Left, A)
+	DFS(T.Right, A)
 	A.Hash[T.Value].exit = time
 	time++
 }
 
 func (A *Ancestry) IsDescendant(a, b int) bool {
-	if A.Hash[a].enter < A.Hash[b].enter && A.Hash[a].exit > A.Hash[b].exit {
-		return true
+	if A.Hash[a].enter >= A.Hash[b].enter || A.Hash[a].exit <= A.Hash[b].exit {
+		return false
 	}
-	return false
+	return true
 }
