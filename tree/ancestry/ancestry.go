@@ -19,26 +19,28 @@ func New(T *tree.Tree) *Ancestry {
 	A := &Ancestry{
 		Hash: make(map[int]*Time),
 	}
-	DFS(T, A)
-	return A
+	if T != nil {
+		DFS(T, A)
+		return A
+	}
+	return nil
 }
 
 func DFS(T *tree.Tree, A *Ancestry) {
-	if T == nil {
-		return
-	}
-	A.Hash[T.Value] = &Time{}
-	A.Hash[T.Value].enter = time
+	A.Hash[T.Value] = &Time{time, 0}
 	time++
-	DFS(T.Left, A)
-	DFS(T.Right, A)
+	if T.Left != nil {
+		DFS(T.Left, A)
+	}
+	if T.Right != nil {
+		DFS(T.Right, A)
+	}
 	A.Hash[T.Value].exit = time
 	time++
 }
 
 func (A *Ancestry) IsDescendant(a, b int) bool {
-	hash := A.Hash
-	if hash[a].enter < hash[b].enter && hash[a].exit > hash[b].exit {
+	if A.Hash[a].enter < A.Hash[b].enter && A.Hash[a].exit > A.Hash[b].exit {
 		return true
 	}
 	return false
