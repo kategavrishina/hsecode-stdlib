@@ -36,8 +36,10 @@ func DFS(T *tree.Tree, A *Ancestry) {
 }
 
 func (A *Ancestry) IsDescendant(a, b int) bool {
-	if A.Hash[a].enter >= A.Hash[b].enter || A.Hash[a].exit <= A.Hash[b].exit {
-		return false
+	timeA := A.Hash[a]
+	timeB := A.Hash[b]
+	if timeA.enter < timeB.enter && timeA.exit > timeB.exit {
+		return true
 	}
-	return true
+	return false
 }
